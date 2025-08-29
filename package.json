@@ -2,6 +2,7 @@
   "name": "login-react-devops",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://camilastolte.github.io/login-react-devops",
   "dependencies": {
     "react": "^19.1.1",
     "react-dom": "^19.1.1",
