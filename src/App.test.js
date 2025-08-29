@@ -1,8 +1,26 @@
 import { render, screen } from '@testing-library/react';
 import App from './App';
 
-test('renders learn react link', () => {
+test('renders login form', () => {
   render(<App />);
-  const linkElement = screen.getByText(/learn react/i);
-  expect(linkElement).toBeInTheDocument();
+  const loginTitle = screen.getByText(/login/i);
+  expect(loginTitle).toBeInTheDocument();
+});
+
+test('renders email input', () => {
+  render(<App />);
+  const emailInput = screen.getByPlaceholderText(/e-mail/i);
+  expect(emailInput).toBeInTheDocument();
+});
+
+test('renders password input', () => {
+  render(<App />);
+  const passwordInput = screen.getByPlaceholderText(/senha/i);
+  expect(passwordInput).toBeInTheDocument();
+});
+
+test('renders access button', () => {
+  render(<App />);
+  const accessButton = screen.getByText(/acessar/i);
+  expect(accessButton).toBeInTheDocument();
 });
