@@ -2,6 +2,7 @@
   "name": "login-react-devops",
   "version": "0.1.0",
   "private": true,
+  "homepage": "https://camilastolte.github.io/login-react-devops",
   "dependencies": {
     "@testing-library/dom": "^10.4.1",
     "@testing-library/jest-dom": "^6.6.4",
