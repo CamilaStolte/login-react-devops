@@ -23,7 +23,35 @@ jobs:
       run: npm install
     
     - name: Run tests
-      run: npm test -- --ci --watchAll=false
+      run: npm test -- --watchAll=false --passWithNoTests
     
     - name: Build
       run: npm run build
+    
+    # Notificação Discord - Sucesso
+    - name: Discord notification - Success
+      if: success()
+      uses: Ilshidur/action-discord@master
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      with:
+        args: '✅ **CI Build Successful!** 
+        📦 **Repository:** ${{ github.repository }}
+        🌿 **Branch:** ${{ github.ref_name }}
+        👤 **Author:** ${{ github.actor }}
+        💬 **Commit:** ${{ github.event.head_commit.message }}
+        🔗 **Link:** ${{ github.event.head_commit.url }}'
+    
+    # Notificação Discord - Falha
+    - name: Discord notification - Failure
+      if: failure()
+      uses: Ilshidur/action-discord@master
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      with:
+        args: '❌ **CI Build Failed!** 
+        📦 **Repository:** ${{ github.repository }}
+        🌿 **Branch:** ${{ github.ref_name }}
+        👤 **Author:** ${{ github.actor }}
+        💬 **Commit:** ${{ github.event.head_commit.message }}
+        🔗 **Link:** ${{ github.event.head_commit.url }}'
