@@ -28,3 +28,33 @@ jobs:
         echo "Deploying application..."
         echo "Build completed successfully"
         echo "Application ready for deployment"
+    
+    # Notificação Discord - Deploy Sucesso
+    - name: Discord notification - Deploy Success
+      if: success()
+      uses: Ilshidur/action-discord@master
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      with:
+        args: '🚀 **Deploy Successful!** 
+        📦 **Repository:** ${{ github.repository }}
+        🌿 **Branch:** main
+        👤 **Author:** ${{ github.actor }}
+        💬 **Commit:** ${{ github.event.head_commit.message }}
+        ✨ **Status:** Application deployed successfully!
+        🔗 **Link:** ${{ github.event.head_commit.url }}'
+    
+    # Notificação Discord - Deploy Falha
+    - name: Discord notification - Deploy Failure
+      if: failure()
+      uses: Ilshidur/action-discord@master
+      env:
+        DISCORD_WEBHOOK: ${{ secrets.DISCORD_WEBHOOK }}
+      with:
+        args: '💥 **Deploy Failed!** 
+        📦 **Repository:** ${{ github.repository }}
+        🌿 **Branch:** main
+        👤 **Author:** ${{ github.actor }}
+        💬 **Commit:** ${{ github.event.head_commit.message }}
+        ❗ **Status:** Deployment failed - check logs
+        🔗 **Link:** ${{ github.event.head_commit.url }}'
